@@ -10,7 +10,10 @@ const isEqual = (a: string, b: string) => {
 const getDifficulty = () => {
     const url = new URL(window.location.href);
     const difficulty = url.searchParams.get("difficulty");
-    if (!difficulty) return 1;
+    if (!difficulty) {
+        storeDifficulty(1);
+        return 1;
+    }
 
     return parseInt(difficulty);
 };
