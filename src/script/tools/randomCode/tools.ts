@@ -7,12 +7,17 @@ const hash = (str: string) => {
 };
 
 const lastRandomMap = new Map<number, number>();
-export const rInt = (min: number, max: number) => {
+export const rInt = (min: number, max: number): number => {
     const r = Math.floor(Math.random() * (max - min + 1)) + min;
     const randomMapKey = hash(`${min}-${max}-` + new Error().stack);
     const lastRandom = lastRandomMap.get(randomMapKey);
+
     if (r === lastRandom) {
-        return rInt(min, max);
+        const r2 = Math.floor(Math.random() * (max - min + 1)) + min;
+        if (r2 !== r) {
+            lastRandomMap.set(randomMapKey, r2);
+            return r2;
+        }
     }
 
     lastRandomMap.set(randomMapKey, r);

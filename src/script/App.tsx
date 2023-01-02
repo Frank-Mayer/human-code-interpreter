@@ -7,8 +7,22 @@ const isEqual = (a: string, b: string) => {
     return a.trim().replace(/\s+/g, " ") === b.trim().replace(/\s+/g, " ");
 };
 
+const getDifficulty = () => {
+    const url = new URL(window.location.href);
+    const difficulty = url.searchParams.get("difficulty");
+    if (!difficulty) return 1;
+
+    return parseInt(difficulty);
+};
+
+const storeDifficulty = (difficulty: number) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("difficulty", difficulty.toString());
+    window.history.replaceState({}, "", url.href);
+};
+
 export const App = () => {
-    const [difficulty, setDifficulty] = React.useState(1);
+    const [difficulty, setDifficulty] = React.useState(getDifficulty());
     const [prog, setProg] = React.useState<JProg>();
     const [userOutput, setUserOutput] = React.useState("");
     const [realOutput, setRealOutput] = React.useState("");
@@ -32,6 +46,7 @@ export const App = () => {
 
                             setDifficulty(newDifficulty);
                             setProg(randomCode(newDifficulty));
+                            storeDifficulty(newDifficulty);
                         }}
                     >
                         <option value={1}>Easy</option>
@@ -56,6 +71,7 @@ export const App = () => {
                             <p className="correct">Correct!</p>
 
                             <button
+                                className="correct"
                                 onClick={() => {
                                     setProg(randomCode(difficulty));
                                     setRealOutput("");
@@ -74,6 +90,7 @@ export const App = () => {
                             </div>
 
                             <button
+                                className="wrong"
                                 onClick={() => {
                                     setProg(randomCode(difficulty));
                                     setRealOutput("");

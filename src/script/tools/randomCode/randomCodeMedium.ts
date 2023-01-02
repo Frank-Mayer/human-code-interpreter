@@ -7,35 +7,6 @@ import { getVarNames, pickRandom, rInt } from "./tools";
 
 const randomCodeMedium_001 = (): JProg => {
     const varNames = getVarNames();
-    const max = rInt(5, 10);
-
-    return new JProg(
-        ["import java.util.ArrayList;"],
-        new JClass("Main", [
-            new JMethod(
-                ["public", "static"],
-                "main",
-                "void",
-                [new JParameter("args", "String[]")],
-                [
-                    `var ${varNames[0]} = new ArrayList<Integer>(${max});`,
-                    `var ${varNames[1]} = -1;`,
-                    "",
-                    `while(${varNames[1]} < ${max - 1}) {`,
-                    `${tab}${varNames[0]}[++${varNames[1]}] = ${varNames[1]};`,
-                    `}`,
-                    "",
-                    `for(${varNames[1]} = 0; ${varNames[1]} < ${max}; ${varNames[1]}++) {`,
-                    `${tab}System.out.println(${varNames[0]}[${varNames[1]}]);`,
-                    `}`,
-                ].join("\n")
-            ),
-        ])
-    );
-};
-
-const randomCodeMedium_002 = (): JProg => {
-    const varNames = getVarNames();
 
     return new JProg(
         [],
@@ -67,6 +38,56 @@ const randomCodeMedium_002 = (): JProg => {
     );
 };
 
+const randomCodeMedium_002 = (): JProg => {
+    const start = rInt(0, 2);
+    const end = start + rInt(4, 6);
+    const step = rInt(1, 3);
+
+    return new JProg(
+        [],
+        new JClass("Main", [
+            new JMethod(
+                ["public", "static"],
+                "main",
+                "void",
+                [new JParameter("args", "String[]")],
+                [
+                    `for (int i = ${start}; i <= ${end}; i += ${step}) {`,
+                    `${tab}System.out.println(i);`,
+                    "}",
+                ].join("\n")
+            ),
+        ])
+    );
+};
+
+const randomCodeMedium_003 = (): JProg => {
+    const start = rInt(15, 17);
+    const end = start - rInt(6, 8);
+    const step = rInt(1, 3);
+
+    return new JProg(
+        [],
+        new JClass("Main", [
+            new JMethod(
+                ["public", "static"],
+                "main",
+                "void",
+                [new JParameter("args", "String[]")],
+                [
+                    `for (int i = ${start}; i >= ${end}; i -= ${step}) {`,
+                    `${tab}System.out.println(i);`,
+                    "}",
+                ].join("\n")
+            ),
+        ])
+    );
+};
+
 export const randomCodeMedium = (): JProg => {
-    return pickRandom(randomCodeMedium_001, randomCodeMedium_002)();
+    return pickRandom(
+        randomCodeMedium_001,
+        randomCodeMedium_002,
+        randomCodeMedium_003
+    )();
 };

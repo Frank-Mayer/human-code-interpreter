@@ -108,6 +108,7 @@ main {
 
         .output {
             grid-area: output;
+            max-height: calc(100vh - 48px);
         }
     }
 }

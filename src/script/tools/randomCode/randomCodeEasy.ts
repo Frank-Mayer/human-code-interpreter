@@ -51,7 +51,7 @@ const randomCodeEasy_002 = (): JProg => {
                     `${tab}"${varNames[4]}"`,
                     "};",
                     "",
-                    "System.out.println(animals[1]);",
+                    `System.out.println(animals[${rInt(0, 4)}]);`,
                 ].join("\n")
             ),
         ])
@@ -60,8 +60,8 @@ const randomCodeEasy_002 = (): JProg => {
 
 const randomCodeEasy_003 = (): JProg => {
     const varNames = getVarNames();
-    const count = rInt(5, 10);
-    const index = rInt(1, count - 3);
+    const count = rInt(6, 11);
+    const index = rInt(2, count - 3);
 
     const body = [`ArrayList<String> animals = new ArrayList<>(${count});`];
 
@@ -70,7 +70,7 @@ const randomCodeEasy_003 = (): JProg => {
     }
 
     body.push("");
-    body.push(`animals.remove(${index});`);
+    body.push(`animals.remove(${rInt(index - 1, index + 1)});`);
     body.push("");
     body.push(`System.out.println(animals.get(${index}));`);
 
@@ -88,10 +88,66 @@ const randomCodeEasy_003 = (): JProg => {
     );
 };
 
+const randomCodeEasy_004 = (): JProg => {
+    const varNames = getVarNames();
+    const value = rInt(6, 19);
+    const a = rInt(6, 19);
+    const b = rInt(6, 19);
+
+    return new JProg(
+        [],
+        new JClass("Main", [
+            new JMethod(
+                ["public", "static"],
+                "main",
+                "void",
+                [new JParameter("args", "String[]")],
+                [
+                    `int i = ${value};`,
+                    "",
+                    `if (i >= ${a}) {`,
+                    `${tab}System.out.println("${varNames[1]}");`,
+                    "}",
+                    `else if (i <= ${b}) {`,
+                    `${tab}System.out.println("${varNames[2]}");`,
+                    "}",
+                    `else {`,
+                    `${tab}System.out.println("${varNames[3]}");`,
+                    "}",
+                ].join("\n")
+            ),
+        ])
+    );
+};
+
+const randomCodeEasy_005 = (): JProg => {
+    const start = rInt(0, 2);
+    const end = start + rInt(4, 6);
+
+    return new JProg(
+        [],
+        new JClass("Main", [
+            new JMethod(
+                ["public", "static"],
+                "main",
+                "void",
+                [new JParameter("args", "String[]")],
+                [
+                    `for (int i = ${start}; i <= ${end}; i++) {`,
+                    `${tab}System.out.println(i);`,
+                    "}",
+                ].join("\n")
+            ),
+        ])
+    );
+};
+
 export const randomCodeEasy = (): JProg => {
     return pickRandom(
         randomCodeEasy_001,
         randomCodeEasy_002,
-        randomCodeEasy_003
+        randomCodeEasy_003,
+        randomCodeEasy_004,
+        randomCodeEasy_005
     )();
 };
