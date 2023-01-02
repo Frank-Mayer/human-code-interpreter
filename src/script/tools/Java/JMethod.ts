@@ -1,6 +1,7 @@
 import type { JClass } from "./JClass";
 import type { JParameter } from "./JParameter";
 import type { JVarType } from "./JVarType";
+import { tab } from "./tab";
 
 type JModifier = "public" | "private" | "protected" | "static" | "final";
 
@@ -28,16 +29,19 @@ export class JMethod {
     }
 
     toString() {
-        return (
+        return [
             [
-                [...this.modifiers].join(" "),
+                tab + [...this.modifiers].join(" "),
                 this.returnType,
                 this.name,
                 "(" + this.parameters.map((p) => p.toString()).join(", ") + ")",
                 "{",
-            ].join(" ") +
-            this.body +
-            "}"
-        );
+            ].join(" "),
+            this.body
+                .split("\n")
+                .map((line) => tab + tab + line.trimEnd())
+                .join("\n"),
+            tab + "}",
+        ].join("\n");
     }
 }

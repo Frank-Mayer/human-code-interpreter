@@ -2,6 +2,7 @@ import { JClass } from "../Java/JClass";
 import { JMethod } from "../Java/JMethod";
 import { JParameter } from "../Java/JParameter";
 import { JProg } from "../Java/JProg";
+import { tab } from "../Java/tab";
 import { getVarNames, pickRandom, rInt } from "./tools";
 
 const randomCodeEasy_001 = (): JProg => {
@@ -10,7 +11,7 @@ const randomCodeEasy_001 = (): JProg => {
     return new JProg(
         new JClass("Main", [
             new JMethod(
-                ["static"],
+                ["public", "static"],
                 "main",
                 "void",
                 [new JParameter("args", "String[]")],
@@ -21,7 +22,8 @@ const randomCodeEasy_001 = (): JProg => {
                     `${varNames[0]} = ${varNames[0]} + ${varNames[1]};`,
                     `${varNames[1]} = ${varNames[0]} + ${varNames[2]};`,
                     `${varNames[2]} = ${varNames[0]} + ${varNames[1]};`,
-                    `\nSystem.out.println(${varNames[1]});`,
+                    "",
+                    `System.out.println(${varNames[1]});`,
                 ].join("\n")
             ),
         ])
@@ -34,7 +36,7 @@ const randomCodeEasy_002 = (): JProg => {
     return new JProg(
         new JClass("Main", [
             new JMethod(
-                ["static"],
+                ["public", "static"],
                 "main",
                 "void",
                 [new JParameter("args", "String[]")],
@@ -47,12 +49,12 @@ const randomCodeEasy_002 = (): JProg => {
                     `${varNames[0]} *= ${varNames[2]}++;`,
                     "",
                     "System.out.printf(",
-                    '"%d %d %d %d %d",',
-                    `${varNames[0]},`,
-                    `${varNames[1]},`,
-                    `${varNames[2]},`,
-                    `${varNames[3]},`,
-                    `${varNames[4]}`,
+                    tab + '"%d %d %d %d %d",',
+                    tab + `${varNames[0]},`,
+                    tab + `${varNames[1]},`,
+                    tab + `${varNames[2]},`,
+                    tab + `${varNames[3]},`,
+                    tab + `${varNames[4]}`,
                     ");",
                 ].join("\n")
             ),

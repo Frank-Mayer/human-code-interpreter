@@ -1,4 +1,3 @@
-import { format } from "../format";
 import type { JClass } from "./JClass";
 import javaToJs from "java-to-javascript/lib";
 import { JSystem } from "./JSystem";
@@ -25,10 +24,10 @@ export class JProg {
         this.jClasses = jClasses;
         this.system = new JSystem();
 
-        this.java = format(
-            this.mainClass.toString() +
-                this.jClasses.map((jClass) => jClass.toString()).join("\n\n")
-        );
+        this.java =
+            [this.mainClass, ...this.jClasses]
+                .map((jClass) => jClass.toString())
+                .join("\n") + "\n";
 
         try {
             const js = new Function(

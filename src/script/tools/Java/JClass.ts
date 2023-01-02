@@ -1,5 +1,6 @@
 import type { JField } from "./JField";
 import type { JMethod } from "./JMethod";
+import { tab } from "./tab";
 
 export class JClass {
     readonly name: string;
@@ -16,11 +17,11 @@ export class JClass {
     }
 
     toString() {
-        return (
-            `class ${this.name} {` +
-            this.fields.map((f) => f.toString()).join("\n") +
-            this.methods.map((m) => m.toString()).join("\n") +
-            "}"
-        );
+        return [
+            `class ${this.name} {`,
+            this.fields.map((f) => tab + f.toString()).join("\n"),
+            this.methods.map((m) => m.toString()).join("\n"),
+            "}",
+        ].join("\n");
     }
 }

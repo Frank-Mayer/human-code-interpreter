@@ -12,7 +12,7 @@ const randomCodeHard_001 = (): JProg => {
     return new JProg(
         new JClass("Main", [
             new JMethod(
-                ["static"],
+                ["public", "static"],
                 "main",
                 "void",
                 [new JParameter("args", "String[]")],
