@@ -1,0 +1,9 @@
+/dist/
+/.parcel-cache/
+/node_modules/
+/yarn.lock
+/bun.lockb
+/package-lock.json
+/pnpm-lock.yaml
+/.idea/
+/.env
