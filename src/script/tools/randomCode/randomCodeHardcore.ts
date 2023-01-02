@@ -15,15 +15,7 @@ const randomCodeHardcore_001 = (): JProg => {
                 "main",
                 "void",
                 [new JParameter("args", "String[]")],
-                [
-                    `int ${varNames[0]} = ${rInt(0, 100)};`,
-                    `int ${varNames[1]} = ${rInt(0, 100)};`,
-                    `String ${varNames[2]} = "Help!";`,
-                    `${varNames[0]} = ${varNames[1]} + ${varNames[2]};`,
-                    `${varNames[2]} = ${rInt(30, 110)} % ${varNames[1]};`,
-                    `${varNames[1]} = ${varNames[0]} + ${varNames[2]};`,
-                    `\nSystem.out.println(${varNames[1]});`,
-                ].join("\n")
+                ["// not finished"].join("\n")
             ),
         ])
     );
