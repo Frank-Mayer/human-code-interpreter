@@ -41,7 +41,7 @@ const randomCodeMedium_001 = (): JProg => {
 const randomCodeMedium_002 = (): JProg => {
     const start = rInt(0, 2);
     const end = start + rInt(4, 6);
-    const step = rInt(1, 3);
+    const step = rInt(2, 3);
 
     return new JProg(
         [],
@@ -64,7 +64,7 @@ const randomCodeMedium_002 = (): JProg => {
 const randomCodeMedium_003 = (): JProg => {
     const start = rInt(15, 17);
     const end = start - rInt(6, 8);
-    const step = rInt(1, 3);
+    const step = rInt(2, 3);
 
     return new JProg(
         [],
