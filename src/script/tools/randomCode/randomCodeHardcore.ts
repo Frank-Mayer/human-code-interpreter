@@ -8,6 +8,7 @@ const randomCodeHardcore_001 = (): JProg => {
     const varNames = getVarNames();
 
     return new JProg(
+        [],
         new JClass("Main", [
             new JMethod(
                 ["public", "static"],

@@ -41,6 +41,6 @@ export class JPrintStream {
     }
 
     get history() {
-        return this._history.trimEnd();
+        return this._history;
     }
 }

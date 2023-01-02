@@ -10,6 +10,7 @@ const randomCodeHard_001 = (): JProg => {
     const max = rInt(5, 10);
 
     return new JProg(
+        ["import java.util.ArrayList;"],
         new JClass("Main", [
             new JMethod(
                 ["public", "static"],
