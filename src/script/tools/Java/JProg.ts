@@ -14,7 +14,8 @@ export class JProg {
     constructor(
         imports: Array<string>,
         mainClass: JClass,
-        ...jClasses: JClass[]
+        jClasses: JClass[] = [],
+        customJs?: () => string
     ) {
         if (
             mainClass.methods.find(
@@ -34,24 +35,28 @@ export class JProg {
         this.java =
             "package io.frankmayer.javafun;\n\n" +
             (this.imports.length != 0 ? this.imports.join("\n") + "\n\n" : "") +
-            [this.mainClass, ...this.jClasses]
+            [...this.jClasses, this.mainClass]
                 .map((jClass) => jClass.toString())
-                .join("\n") +
+                .join("\n\n") +
             "\n";
 
         try {
-            const js = new Function(
-                "System",
-                "ArrayList",
-                javaToJs(this.java) + `\n${mainClass.name}.main([]);`
-            );
+            if (customJs) {
+                this.js = customJs;
+            } else {
+                const js = new Function(
+                    "System",
+                    "ArrayList",
+                    javaToJs(this.java) + `\n${mainClass.name}.main([]);`
+                );
 
-            console.debug(js.toString());
+                console.debug(js.toString());
 
-            this.js = () => {
-                js(this.system, ArrayList);
-                return this.system.out.history;
-            };
+                this.js = () => {
+                    js(this.system, ArrayList);
+                    return this.system.out.history;
+                };
+            }
         } catch (e) {
             console.error(e, this.java);
             this.js = () => `Error "${e.name}"\n${e.message}`;

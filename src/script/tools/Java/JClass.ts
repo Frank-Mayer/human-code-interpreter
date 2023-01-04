@@ -17,11 +17,13 @@ export class JClass {
     }
 
     toString() {
-        return [
-            `class ${this.name} {`,
-            this.fields.map((f) => tab + f.toString()).join("\n"),
-            this.methods.map((m) => m.toString()).join("\n"),
-            "}",
-        ].join("\n");
+        return (
+            `class ${this.name} {\n` +
+            [
+                ...this.fields.map((f) => tab + f.toString()),
+                ...this.methods.map((m) => m.toString()),
+            ].join("\n\n") +
+            "\n}"
+        );
     }
 }

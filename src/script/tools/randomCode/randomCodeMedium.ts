@@ -1,9 +1,17 @@
 import { JClass } from "../Java/JClass";
+import { JConstructor } from "../Java/JConstructor";
+import { JField } from "../Java/JField";
 import { JMethod } from "../Java/JMethod";
 import { JParameter } from "../Java/JParameter";
 import { JProg } from "../Java/JProg";
 import { tab } from "../Java/tab";
-import { getVarNames, pickRandom, rInt } from "./tools";
+import {
+    getBarkingSounds,
+    getDogs,
+    getVarNames,
+    pickRandom,
+    rInt,
+} from "./tools";
 
 const randomCodeMedium_001 = (): JProg => {
     const varNames = getVarNames();
@@ -84,10 +92,91 @@ const randomCodeMedium_003 = (): JProg => {
     );
 };
 
+const randomCodeMedium_004 = (): JProg => {
+    const varNames = getDogs();
+    const bark = getBarkingSounds();
+
+    return new JProg(
+        [],
+        new JClass("Main", [
+            new JMethod(
+                ["public", "static"],
+                "main",
+                "void",
+                [new JParameter("args", "String[]")],
+                [
+                    `Dog ${varNames[0]} = new Dog();`,
+                    `Dog ${varNames[1]} = new Dog("${bark[0]}");`,
+                    `${varNames[0]}.bark();`,
+                    `${varNames[1]}.bark();`,
+                    `${varNames[0]}.setBark("${bark[1]}");`,
+                    `${varNames[0]}.bark();`,
+                    `${varNames[1]}.bark();`,
+                    `${varNames[0]}.bark("${bark[2]}");`,
+                ].join("\n")
+            ),
+        ]),
+        [
+            new JClass(
+                "Dog",
+                [
+                    new JConstructor(
+                        ["public"],
+                        "Dog",
+                        [new JParameter("bark", "String")],
+                        "this.bark = bark;"
+                    ),
+                    new JConstructor(
+                        ["public"],
+                        "Dog",
+                        [],
+                        `this.bark = "${bark[2]}";`
+                    ),
+                    new JMethod(
+                        ["public"],
+                        "setBark",
+                        "void",
+                        [new JParameter("bark", "String")],
+                        `this.bark = bark;`
+                    ),
+                    new JMethod(
+                        ["public"],
+                        "bark",
+                        "void",
+                        [],
+                        [
+                            "String bark;",
+                            "bark = this.bark.concat(this.bark);",
+                            "System.out.println(bark);",
+                        ].join("\n")
+                    ),
+                    new JMethod(
+                        ["public"],
+                        "bark",
+                        "void",
+                        [new JParameter("bark", "String")],
+                        "System.out.println(bark);"
+                    ),
+                ],
+                [new JField(["private"], "bark", "String")]
+            ),
+        ],
+        () =>
+            [
+                bark[2] + bark[2],
+                bark[0] + bark[0],
+                bark[1] + bark[1],
+                bark[0] + bark[0],
+                bark[2],
+            ].join("\n")
+    );
+};
+
 export const randomCodeMedium = (): JProg => {
     return pickRandom(
         randomCodeMedium_001,
         randomCodeMedium_002,
-        randomCodeMedium_003
+        randomCodeMedium_003,
+        randomCodeMedium_004
     )();
 };

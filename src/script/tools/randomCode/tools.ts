@@ -38,6 +38,34 @@ const shuffle = <T>(arr: Iterable<T>) => {
     return newArr;
 };
 
+const dogs: Array<string> = [
+    "husky",
+    "pug",
+    "poodle",
+    "labrador",
+    "shepherd",
+    "beagle",
+    "bulldog",
+    "dalmatian",
+    "chihuahua",
+    "terrier",
+    "corgi",
+    "boxer",
+    "rottweiler",
+];
+
+const barkingSounds: Array<string> = [
+    "woof",
+    "bark",
+    "arf",
+    "yip",
+    "yap",
+    "howl",
+    "bellow",
+    "bay",
+    "bawl",
+];
+
 const varNames: Array<string> = [
     "ant",
     "bat",
@@ -99,3 +127,6 @@ const varNames: Array<string> = [
 ];
 
 export const getVarNames = () => shuffle(varNames);
+
+export const getDogs = () => shuffle(dogs);
+export const getBarkingSounds = () => shuffle(barkingSounds);

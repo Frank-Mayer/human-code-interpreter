@@ -102,7 +102,7 @@ main {
             grid-area: java-source;
 
             > pre {
-                max-height: calc(100% - 32px);
+                max-height: calc(100vh - 80px);
             }
         }
 
