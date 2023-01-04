@@ -50,6 +50,8 @@ export const App = () => {
                             setDifficulty(newDifficulty);
                             setProg(randomCode(newDifficulty));
                             storeDifficulty(newDifficulty);
+                            setRealOutput("");
+                            setUserOutput("");
                         }}
                     >
                         <option value={1}>Easy</option>
