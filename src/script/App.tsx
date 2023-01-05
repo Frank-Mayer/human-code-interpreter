@@ -53,8 +53,7 @@ const focusTextField = () => {
         const textField = document.querySelector("textarea");
         if (textField)
             setTimeout(() => {
-                console.debug(textField, "Focusing text field");
-                return textField.focus();
+                textField.focus();
             }, 200);
     }, 200);
 };
