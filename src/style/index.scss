@@ -185,3 +185,7 @@ button {
         background-color: rgb(0, 0, 0, 0.2);
     }
 }
+
+::selection {
+    background-color: rgb(white, 0.1);
+}
