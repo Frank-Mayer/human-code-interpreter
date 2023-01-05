@@ -1,0 +1,73 @@
+.app
+    height: 100vh
+    width: 100vw
+    inset: 0
+    padding: 0.5rem
+
+    > *,
+    > * > *
+        display: block
+
+    > *
+        textarea, pre, code
+            font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace
+
+    &__header
+        display: flex
+        flex-direction: row
+        justify-content: flex-start
+        align-items: flex-start
+        gap: 0.5rem
+        flex-wrap: wrap
+
+@media (min-width: 120vh)
+    .app
+        display: grid
+        grid-template-columns: 1fr 1fr
+        grid-template-rows: auto 1fr
+        gap: 0.5rem
+        grid-template-areas: "header header" "display-source output"
+
+        &__header
+            grid-area: header
+
+        &__display-source
+            grid-area: display-source
+
+            > pre
+                max-height: calc(100vh - 80px)
+
+        &__output
+            grid-area: output
+            max-height: calc(100vh - 48px)
+
+@media (max-width: 120vh)
+    .app
+        display: grid
+        grid-template-columns: 1fr
+        grid-template-rows: auto 1fr 1fr
+        gap: 0.5rem
+        grid-template-areas: "header" "output" "display-source"
+
+        min-height: 0
+        min-width: 0
+
+        > *
+            overflow: hidden
+            min-width: 0
+
+        &__header
+            grid-area: header
+
+        &__display-source
+            grid-area: display-source
+            white-space: nowrap
+            width: 100%
+            height: 100%
+
+            > pre
+                width: 100%
+                max-height: calc(100% - 32px)
+
+        &__output
+            grid-area: output

@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const Code = (props: Props) => (
-    <SyntaxHighlighter language="java" style={style} showLineNumbers wrapLines>
+    <SyntaxHighlighter language="java" style={style} showLineNumbers>
         {props.code}
     </SyntaxHighlighter>
 );

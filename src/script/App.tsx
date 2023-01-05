@@ -75,7 +75,7 @@ export const App = () => {
 
     return (
         <>
-            <header className="header">
+            <header className="app__header">
                 <label>
                     Difficulty:
                     <select
@@ -118,21 +118,21 @@ export const App = () => {
                 </label>
             </header>
 
-            <section className="display-source">
+            <section className="app__display-source">
                 <p>What will the following code print?</p>
                 <Code code={prog.displaySource} />
             </section>
 
-            <section className="output">
+            <section className="app__output output">
                 <p>Output:</p>
 
                 {realOutput ? (
                     correct === 100 ? (
                         <>
-                            <p className="correct">Correct!</p>
+                            <p className="output__element--correct">Correct!</p>
 
                             <button
-                                className="correct"
+                                className="output__element--correct"
                                 onClick={() => {
                                     setProg(randomCode(difficulty, lang));
                                     setRealOutput("");
@@ -146,13 +146,17 @@ export const App = () => {
                     ) : (
                         <>
                             <div>
-                                <pre className="wrong">{userOutput}</pre>
+                                <pre className="output__element--wrong">
+                                    {userOutput}
+                                </pre>
                                 <br />
-                                <pre className="correct">{realOutput}</pre>
+                                <pre className="output__element--correct">
+                                    {realOutput}
+                                </pre>
                             </div>
 
                             <button
-                                className="wrong"
+                                className="output__element--wrong"
                                 onClick={() => {
                                     setProg(randomCode(difficulty, lang));
                                     setRealOutput("");
@@ -167,6 +171,7 @@ export const App = () => {
                 ) : (
                     <>
                         <textarea
+                            className="output__input"
                             value={userOutput}
                             onChange={(ev) => {
                                 setUserOutput(ev.target.value);
@@ -177,24 +182,38 @@ export const App = () => {
                             autoFocus
                         ></textarea>
 
-                        <button
-                            onClick={() => {
-                                try {
-                                    const out = prog.js();
-                                    setRealOutput(out);
-                                    setCorrect(
-                                        compare(
-                                            normalize(out),
-                                            normalize(userOutput)
-                                        )
-                                    );
-                                } catch (e) {
-                                    console.error(e);
-                                }
-                            }}
-                        >
-                            Check
-                        </button>
+                        <p className="button-wrapper">
+                            <button
+                                className="button-wrapper__button"
+                                onClick={() => {
+                                    setProg(randomCode(difficulty, lang));
+                                    setRealOutput("");
+                                    setUserOutput("");
+                                    setCorrect(0);
+                                }}
+                            >
+                                Skip
+                            </button>
+                            <button
+                                className="button-wrapper__button button-wrapper__button--primary"
+                                onClick={() => {
+                                    try {
+                                        const out = prog.js();
+                                        setRealOutput(out);
+                                        setCorrect(
+                                            compare(
+                                                normalize(out),
+                                                normalize(userOutput)
+                                            )
+                                        );
+                                    } catch (e) {
+                                        console.error(e);
+                                    }
+                                }}
+                            >
+                                Check
+                            </button>
+                        </p>
                     </>
                 )}
             </section>

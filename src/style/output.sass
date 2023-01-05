@@ -1,0 +1,36 @@
+.output
+    display: grid
+    grid-template-columns: 1fr
+    grid-template-rows: auto 1fr auto
+    gap: 0.5rem
+    grid-template-areas: "." "." "."
+
+    > *
+        overflow-x: hidden
+        overflow-y: auto
+        max-width: 100%
+        min-width: 0
+
+    .output__input
+        border-radius: 0.25rem
+        border: 1px solid rgb(0, 0, 0, 0.2)
+        background-color: rgb(0, 0, 0, 0.1)
+        padding: 0.2rem 0.25rem
+        width: 100%
+        resize: none
+        font-size: 1rem
+
+    .output__element--correct,
+    .output__element--wrong
+        border-width: 1px
+        border-style: solid
+        border-radius: 0.25rem
+        padding: 0.2rem 0.25rem
+        min-height: 2rem
+        display: block
+
+    .output__element--correct
+        border-color: rgb(0, 175, 0)
+
+    .output__element--wrong
+        border-color: rgb(200, 0, 0)
