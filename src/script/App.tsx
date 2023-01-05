@@ -164,7 +164,9 @@ export const App = () => {
                                     focusTextField();
                                 }}
                             >
-                                {correct}% Correct – Retry
+                                {Number.isSafeInteger(correct)
+                                    ? `${correct}% Correct – Retry`
+                                    : "Retry"}
                             </button>
                         </>
                     )
@@ -184,7 +186,7 @@ export const App = () => {
 
                         <p className="button-wrapper">
                             <button
-                                className="button-wrapper__button button"
+                                className="button"
                                 onClick={() => {
                                     setProg(randomCode(difficulty, lang));
                                     setRealOutput("");
@@ -195,7 +197,7 @@ export const App = () => {
                                 Skip
                             </button>
                             <button
-                                className="button-wrapper__button button-wrapper__button button button--primary"
+                                className="button button--primary"
                                 onClick={() => {
                                     try {
                                         const out = prog.js();

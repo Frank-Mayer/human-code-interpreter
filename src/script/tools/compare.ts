@@ -6,6 +6,8 @@
  * @see https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient
  */
 export const compare = (a: string, b: string) => {
+    if (a === b) return 100;
+
     const bigramsA = getBigrams(a);
     const bigramsB = getBigrams(b);
     const intersection = bigramsA.filter((bigram) => bigramsB.includes(bigram));
