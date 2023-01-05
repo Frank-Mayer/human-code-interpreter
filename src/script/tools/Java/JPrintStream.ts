@@ -19,11 +19,24 @@ export class JPrintStream {
         const f = format.replace(/%(s|f|d|b|n)/g, (_, t) => {
             switch (t) {
                 case "s":
-                    return args.shift();
+                    const val = args.shift();
+                    if (typeof val === "string") {
+                        return val;
+                    } else if ("toString" in val) {
+                        return val.toString();
+                    } else {
+                        return String(val);
+                    }
                 case "f":
-                    return args.shift().toFixed(6);
+                    if (typeof args[0] === "number") {
+                        return args.shift().toFixed(6);
+                    }
+                    throw new Error("Expected number.");
                 case "d":
-                    return args.shift().toFixed(0);
+                    if (typeof args[0] === "number") {
+                        return args.shift().toFixed(0);
+                    }
+                    throw new Error("Expected number.");
                 case "b":
                     if (typeof args[0] === "boolean") {
                         return args.shift() ? "true" : "false";

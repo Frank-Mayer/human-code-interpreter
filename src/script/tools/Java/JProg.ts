@@ -35,7 +35,7 @@ export class JProg {
         this.java =
             "package io.frankmayer.javafun;\n\n" +
             (this.imports.length != 0 ? this.imports.join("\n") + "\n\n" : "") +
-            [...this.jClasses, this.mainClass]
+            [this.mainClass, ...this.jClasses]
                 .map((jClass) => jClass.toString())
                 .join("\n\n") +
             "\n";
