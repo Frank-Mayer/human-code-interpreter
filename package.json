@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "publish": "parcel build src/index.html --public-url https://Frank-Mayer.github.io/human-code-interpreter"
+    "publish": "parcel build src/index.html --public-url https://Frank-Mayer.github.io/human-code-interpreter --no-source-maps"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.2",
