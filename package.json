@@ -13,6 +13,7 @@
     "process": "^0.11.10"
   },
   "dependencies": {
+    "@frank-mayer/stream": "^1.0.0",
     "java-to-javascript": "^0.1.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
