@@ -43,7 +43,7 @@ const randomCodeEasy_002 = (): JProg => {
                 "void",
                 [new JParameter("args", "String[]")],
                 [
-                    "String animals[] = {",
+                    "String[] animals = {",
                     `${tab}"${varNames[0]}",`,
                     `${tab}"${varNames[1]}",`,
                     `${tab}"${varNames[2]}",`,
