@@ -1,11 +1,12 @@
 import React from "react";
 import { Code } from "./components/Code";
+import { compare } from "./tools/compare";
 import { isLang, Lang } from "./tools/Lang";
 import { randomCode } from "./tools/randomCode";
 import { VirtualProg } from "./tools/VirtualProg";
 
-const isEqual = (a: string, b: string) => {
-    return a.trim().replace(/\s+/g, " ") === b.trim().replace(/\s+/g, " ");
+const normalize = (a: string) => {
+    return a.trim().replace(/\s+/g, " ");
 };
 
 const getDifficulty = () => {
@@ -63,7 +64,7 @@ export const App = () => {
     const [prog, setProg] = React.useState<VirtualProg>();
     const [userOutput, setUserOutput] = React.useState("");
     const [realOutput, setRealOutput] = React.useState("");
-    const [correct, setCorrect] = React.useState(false);
+    const [correct, setCorrect] = React.useState(0);
     const [lang, setLang] = React.useState(getLang());
 
     if (!prog) {
@@ -126,7 +127,7 @@ export const App = () => {
                 <p>Output:</p>
 
                 {realOutput ? (
-                    correct ? (
+                    correct === 100 ? (
                         <>
                             <p className="correct">Correct!</p>
 
@@ -159,7 +160,7 @@ export const App = () => {
                                     focusTextField();
                                 }}
                             >
-                                Retry
+                                {correct}% Correct – Retry
                             </button>
                         </>
                     )
@@ -181,7 +182,12 @@ export const App = () => {
                                 try {
                                     const out = prog.js();
                                     setRealOutput(out);
-                                    setCorrect(isEqual(out, userOutput));
+                                    setCorrect(
+                                        compare(
+                                            normalize(out),
+                                            normalize(userOutput)
+                                        )
+                                    );
                                 } catch (e) {
                                     console.error(e);
                                 }
