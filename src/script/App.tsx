@@ -24,6 +24,17 @@ const storeDifficulty = (difficulty: number) => {
     window.history.replaceState({}, "", url.href);
 };
 
+const focusTextField = () => {
+    setTimeout(() => {
+        const textField = document.querySelector("textarea");
+        if (textField)
+            setTimeout(() => {
+                console.debug(textField, "Focusing text field");
+                return textField.focus();
+            }, 200);
+    }, 200);
+};
+
 export const App = () => {
     const [difficulty, setDifficulty] = React.useState(getDifficulty());
     const [prog, setProg] = React.useState<JProg>();
@@ -33,6 +44,7 @@ export const App = () => {
 
     if (!prog) {
         setProg(randomCode(difficulty));
+        focusTextField();
         return <p>Loading...</p>;
     }
 
@@ -49,9 +61,10 @@ export const App = () => {
 
                             setDifficulty(newDifficulty);
                             setProg(randomCode(newDifficulty));
-                            storeDifficulty(newDifficulty);
                             setRealOutput("");
                             setUserOutput("");
+                            focusTextField();
+                            storeDifficulty(newDifficulty);
                         }}
                     >
                         <option value={1}>Easy</option>
@@ -81,6 +94,7 @@ export const App = () => {
                                     setProg(randomCode(difficulty));
                                     setRealOutput("");
                                     setUserOutput("");
+                                    focusTextField();
                                 }}
                             >
                                 Next
@@ -100,6 +114,7 @@ export const App = () => {
                                     setProg(randomCode(difficulty));
                                     setRealOutput("");
                                     setUserOutput("");
+                                    focusTextField();
                                 }}
                             >
                                 Retry
@@ -116,6 +131,7 @@ export const App = () => {
                             autoCapitalize="off"
                             autoCorrect="off"
                             spellCheck="false"
+                            autoFocus
                         ></textarea>
 
                         <button
