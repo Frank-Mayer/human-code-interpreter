@@ -1,3 +1,4 @@
+@use "theme"
 @use "app"
 @use "output"
 @use "button"
@@ -14,8 +15,8 @@
 
 :root
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif
-    background-color: rgb(40, 44, 52)
-    color: rgb(171, 178, 191)
+    background-color: theme.$color-background
+    color: theme.$color-forground
 
 :root, body, main
     overflow: hidden

@@ -132,7 +132,7 @@ export const App = () => {
                             <p className="output__element--correct">Correct!</p>
 
                             <button
-                                className="output__element--correct"
+                                className="output__element--correct button--primary"
                                 onClick={() => {
                                     setProg(randomCode(difficulty, lang));
                                     setRealOutput("");
@@ -156,7 +156,7 @@ export const App = () => {
                             </div>
 
                             <button
-                                className="output__element--wrong"
+                                className="output__element--wrong button button--primary"
                                 onClick={() => {
                                     setProg(randomCode(difficulty, lang));
                                     setRealOutput("");
@@ -184,7 +184,7 @@ export const App = () => {
 
                         <p className="button-wrapper">
                             <button
-                                className="button-wrapper__button"
+                                className="button-wrapper__button button"
                                 onClick={() => {
                                     setProg(randomCode(difficulty, lang));
                                     setRealOutput("");
@@ -195,7 +195,7 @@ export const App = () => {
                                 Skip
                             </button>
                             <button
-                                className="button-wrapper__button button-wrapper__button--primary"
+                                className="button-wrapper__button button-wrapper__button button button--primary"
                                 onClick={() => {
                                     try {
                                         const out = prog.js();
