@@ -1,7 +1,7 @@
-import { JClass } from "../Java/JClass";
-import { JMethod } from "../Java/JMethod";
-import { JParameter } from "../Java/JParameter";
-import { JProg } from "../Java/JProg";
+import { JClass } from "../JClass";
+import { JMethod } from "../JMethod";
+import { JParameter } from "../JParameter";
+import { JProg } from "../JProg";
 import { getVarNames, pickRandom, rInt } from "./tools";
 
 const randomCodeHardcore_001 = (): JProg => {

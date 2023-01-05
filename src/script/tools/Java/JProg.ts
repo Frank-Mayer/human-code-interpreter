@@ -2,12 +2,13 @@ import type { JClass } from "./JClass";
 import javaToJs from "java-to-javascript/lib";
 import { JSystem } from "./JSystem";
 import { ArrayList } from "./JArrayList";
+import type { VirtualProg } from "../VirtualProg";
 
-export class JProg {
+export class JProg implements VirtualProg {
     readonly imports: string[];
     readonly jClasses: JClass[];
     readonly mainClass: JClass;
-    readonly java: string;
+    readonly displaySource: string;
     readonly js: () => string;
     readonly system: JSystem;
 
@@ -32,7 +33,7 @@ export class JProg {
         this.jClasses = jClasses;
         this.system = new JSystem();
 
-        this.java =
+        this.displaySource =
             "package io.frankmayer.javafun;\n\n" +
             (this.imports.length != 0 ? this.imports.join("\n") + "\n\n" : "") +
             [this.mainClass, ...this.jClasses]
@@ -47,7 +48,8 @@ export class JProg {
                 const js = new Function(
                     "System",
                     "ArrayList",
-                    javaToJs(this.java) + `\n${mainClass.name}.main([]);`
+                    javaToJs(this.displaySource) +
+                        `\n${mainClass.name}.main([]);`
                 );
 
                 console.debug(js.toString());
@@ -58,7 +60,7 @@ export class JProg {
                 };
             }
         } catch (e) {
-            console.error(e, this.java);
+            console.error(e, this.displaySource);
             this.js = () => `Error "${e.name}"\n${e.message}`;
         }
     }

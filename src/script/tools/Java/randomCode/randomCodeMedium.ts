@@ -1,10 +1,10 @@
-import { JClass } from "../Java/JClass";
-import { JConstructor } from "../Java/JConstructor";
-import { JField } from "../Java/JField";
-import { JMethod } from "../Java/JMethod";
-import { JParameter } from "../Java/JParameter";
-import { JProg } from "../Java/JProg";
-import { tab } from "../Java/tab";
+import { JClass } from "../JClass";
+import { JConstructor } from "../JConstructor";
+import { JField } from "../JField";
+import { JMethod } from "../JMethod";
+import { JParameter } from "../JParameter";
+import { JProg } from "../JProg";
+import { tab } from "../tab";
 import {
     getBarkingSounds,
     getDogs,

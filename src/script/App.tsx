@@ -1,7 +1,8 @@
 import React from "react";
 import { Code } from "./components/Code";
+import { isLang, Lang } from "./tools/Lang";
 import { randomCode } from "./tools/randomCode";
-import type { JProg } from "./tools/Java/JProg";
+import { VirtualProg } from "./tools/VirtualProg";
 
 const isEqual = (a: string, b: string) => {
     return a.trim().replace(/\s+/g, " ") === b.trim().replace(/\s+/g, " ");
@@ -15,13 +16,36 @@ const getDifficulty = () => {
         return 1;
     }
 
-    return parseInt(difficulty);
+    const storedDifficulty = parseInt(difficulty);
+    if (storedDifficulty < 1 || storedDifficulty > 3) {
+        storeDifficulty(1);
+        return 1;
+    }
+
+    return storedDifficulty;
 };
 
 const storeDifficulty = (difficulty: number) => {
     const url = new URL(window.location.href);
     url.searchParams.set("difficulty", difficulty.toString());
     window.history.replaceState({}, "", url.href);
+};
+
+const storeLang = (lang: string) => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", lang);
+    window.history.replaceState({}, "", url.href);
+};
+
+const getLang = (): Lang => {
+    const url = new URL(window.location.href);
+    const lang = url.searchParams.get("lang");
+    if (!lang || !isLang(lang)) {
+        storeLang("java");
+        return "java";
+    }
+
+    return lang as Lang;
 };
 
 const focusTextField = () => {
@@ -37,13 +61,14 @@ const focusTextField = () => {
 
 export const App = () => {
     const [difficulty, setDifficulty] = React.useState(getDifficulty());
-    const [prog, setProg] = React.useState<JProg>();
+    const [prog, setProg] = React.useState<VirtualProg>();
     const [userOutput, setUserOutput] = React.useState("");
     const [realOutput, setRealOutput] = React.useState("");
     const [correct, setCorrect] = React.useState(false);
+    const [lang, setLang] = React.useState(getLang());
 
     if (!prog) {
-        setProg(randomCode(difficulty));
+        setProg(randomCode(difficulty, lang));
         focusTextField();
         return <p>Loading...</p>;
     }
@@ -60,7 +85,7 @@ export const App = () => {
                             if (newDifficulty === difficulty) return;
 
                             setDifficulty(newDifficulty);
-                            setProg(randomCode(newDifficulty));
+                            setProg(randomCode(newDifficulty, lang));
                             setRealOutput("");
                             setUserOutput("");
                             focusTextField();
@@ -70,14 +95,32 @@ export const App = () => {
                         <option value={1}>Easy</option>
                         <option value={2}>Medium</option>
                         <option value={3}>Hard</option>
-                        <option value={4}>Yes</option>
+                    </select>
+                </label>
+                <label>
+                    Language:
+                    <select
+                        value={lang}
+                        onChange={(ev) => {
+                            const newLang = ev.target.value;
+                            if (newLang === lang || !isLang(newLang)) return;
+
+                            setLang(newLang);
+                            setProg(randomCode(difficulty, newLang));
+                            setRealOutput("");
+                            setUserOutput("");
+                            focusTextField();
+                            storeLang(newLang);
+                        }}
+                    >
+                        <option value="java">Java</option>
                     </select>
                 </label>
             </header>
 
-            <section className="java-source">
+            <section className="display-source">
                 <p>What will the following code print?</p>
-                <Code code={prog.java} />
+                <Code code={prog.displaySource} />
             </section>
 
             <section className="output">
@@ -91,7 +134,7 @@ export const App = () => {
                             <button
                                 className="correct"
                                 onClick={() => {
-                                    setProg(randomCode(difficulty));
+                                    setProg(randomCode(difficulty, lang));
                                     setRealOutput("");
                                     setUserOutput("");
                                     focusTextField();
@@ -111,7 +154,7 @@ export const App = () => {
                             <button
                                 className="wrong"
                                 onClick={() => {
-                                    setProg(randomCode(difficulty));
+                                    setProg(randomCode(difficulty, lang));
                                     setRealOutput("");
                                     setUserOutput("");
                                     focusTextField();
