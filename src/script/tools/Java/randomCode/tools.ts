@@ -3,28 +3,43 @@ const hash = (str: string) => {
     for (let i = 0; i < str.length; i++) {
         h = (Math.imul(31, h) + str.charCodeAt(i)) | 0;
     }
-    return h;
+    // positive
+    return h >>> 0;
 };
 
 const lastRandomMap = new Map<number, number>();
-export const rInt = (min: number, max: number): number => {
+export const rInt = (
+    min: number,
+    max: number,
+    randomMapKey?: number | string
+): number => {
     const r = Math.floor(Math.random() * (max - min + 1)) + min;
-    const randomMapKey = hash(`${min}-${max}-` + new Error().stack);
-    const lastRandom = lastRandomMap.get(randomMapKey);
+
+    const _randomMapKey = randomMapKey
+        ? typeof randomMapKey === "number"
+            ? randomMapKey
+            : hash(randomMapKey)
+        : hash(`${min}-${max}-` + new Error().stack);
+
+    const lastRandom = lastRandomMap.get(_randomMapKey);
 
     if (r === lastRandom) {
         const r2 = Math.floor(Math.random() * (max - min + 1)) + min;
+
         if (r2 !== r) {
-            lastRandomMap.set(randomMapKey, r2);
+            lastRandomMap.set(_randomMapKey, r2);
             return r2;
         }
     }
 
-    lastRandomMap.set(randomMapKey, r);
+    lastRandomMap.set(_randomMapKey, r);
     return r;
 };
 
-export const pickRandom = <T>(...arr: T[]) => arr[rInt(0, arr.length - 1)];
+export const pickRandom = <T>(...arr: T[]) => {
+    console.debug("pickRandom", arr);
+    return arr[rInt(0, arr.length - 1, "pickRandom" + JSON.stringify(arr))];
+};
 
 /**
  * Fisher–Yates shuffle
