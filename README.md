@@ -1,3 +1,3 @@
-# Java Fun
+# Human Code Interpreter
 
-[![GitHub Pages](https://github.com/Frank-Mayer/java-fun/actions/workflows/deploy.yml/badge.svg)](https://github.com/Frank-Mayer/java-fun/actions/workflows/deploy.yml)
+[![GitHub Pages](https://github.com/Frank-Mayer/human-code-interpreter/actions/workflows/deploy.yml/badge.svg)](https://github.com/Frank-Mayer/human-code-interpreter/actions/workflows/deploy.yml)
