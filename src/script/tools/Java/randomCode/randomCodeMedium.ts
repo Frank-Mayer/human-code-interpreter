@@ -1,9 +1,5 @@
-import { JClass } from "../JClass";
-import { JConstructor } from "../JConstructor";
-import { JField } from "../JField";
-import { JMethod } from "../JMethod";
-import { JParameter } from "../JParameter";
-import { JProg } from "../JProg";
+import { VirtualProg } from "../../VirtualProg";
+import { header } from "../header";
 import { tab } from "../tab";
 import {
     getBarkingSounds,
@@ -13,166 +9,165 @@ import {
     rInt,
 } from "./tools";
 
-const randomCodeMedium_001 = (): JProg => {
+const randomCodeMedium_001 = (): VirtualProg => {
     const varNames = getVarNames();
 
-    return new JProg(
-        [],
-        new JClass("Main", [
-            new JMethod(
-                ["public", "static"],
-                "main",
-                "void",
-                [new JParameter("args", "String[]")],
-                [
-                    `int ${varNames[0]} = ${rInt(1, 4)};`,
-                    `int ${varNames[1]} = ++${varNames[0]};`,
-                    `int ${varNames[2]} = ${varNames[1]}++;`,
-                    `int ${varNames[3]} = ${varNames[2]}--;`,
-                    `int ${varNames[4]} = --${varNames[3]};`,
-                    `${varNames[0]} *= ${varNames[2]}++;`,
-                    "",
-                    "System.out.printf(",
-                    tab + '"%d %d %d %d %d",',
-                    `${tab}${varNames[0]},`,
-                    `${tab}${varNames[1]},`,
-                    `${tab}${varNames[2]},`,
-                    `${tab}${varNames[3]},`,
-                    `${tab}${varNames[4]}`,
-                    ");",
-                ].join("\n")
-            ),
-        ])
-    );
+    const r = rInt(1, 4);
+
+    const java = [
+        header,
+        `public class Main {`,
+        `${tab}public static void main(String[] args) {`,
+        `${tab}${tab}var ${varNames[0]} = ${r};`,
+        `${tab}${tab}var ${varNames[1]} = ++${varNames[0]};`,
+        `${tab}${tab}var ${varNames[2]} = ${varNames[1]}++;`,
+        `${tab}${tab}var ${varNames[3]} = ${varNames[2]}--;`,
+        `${tab}${tab}var ${varNames[4]} = --${varNames[3]};`,
+        `${tab}${tab}${varNames[0]} *= ${varNames[2]}++;`,
+        "",
+        `${tab}${tab}System.out.printf(`,
+        `${tab}${tab}${tab}"%d %d %d %d %d",`,
+        `${tab}${tab}${tab}${varNames[0]},`,
+        `${tab}${tab}${tab}${varNames[1]},`,
+        `${tab}${tab}${tab}${varNames[2]},`,
+        `${tab}${tab}${tab}${varNames[3]},`,
+        `${tab}${tab}${tab}${varNames[4]}`,
+        `${tab}${tab});`,
+        `${tab}}`,
+        `}`,
+    ].join("\n");
+
+    return {
+        displaySource: java,
+        js: () => {
+            let a = r;
+            let b = ++a;
+            let c = b++;
+            let d = c--;
+            let e = --d;
+            a *= c++;
+
+            return `${a} ${b} ${c} ${d} ${e}`;
+        },
+    };
 };
 
-const randomCodeMedium_002 = (): JProg => {
+const randomCodeMedium_002 = (): VirtualProg => {
     const start = rInt(0, 2);
     const end = start + rInt(4, 6);
     const step = rInt(2, 3);
 
-    return new JProg(
-        [],
-        new JClass("Main", [
-            new JMethod(
-                ["public", "static"],
-                "main",
-                "void",
-                [new JParameter("args", "String[]")],
-                [
-                    `for (int i = ${start}; i <= ${end}; i += ${step}) {`,
-                    `${tab}System.out.println(i);`,
-                    "}",
-                ].join("\n")
-            ),
-        ])
-    );
+    const java = [
+        header,
+        `public class Main {`,
+        `${tab}public static void main(String[] args) {`,
+        `${tab}${tab}for (int i = ${start}; i <= ${end}; i += ${step}) {`,
+        `${tab}${tab}${tab}System.out.println(i);`,
+        `${tab}${tab}}`,
+        `${tab}}`,
+        `}`,
+    ].join("\n");
+
+    return {
+        displaySource: java,
+        js: () =>
+            new Array(end - start + 1)
+                .fill(0)
+                .map((_, i) => start + i * step)
+                .join(" "),
+    };
 };
 
-const randomCodeMedium_003 = (): JProg => {
+const randomCodeMedium_003 = (): VirtualProg => {
     const start = rInt(15, 17);
     const end = start - rInt(6, 8);
     const step = rInt(2, 3);
 
-    return new JProg(
-        [],
-        new JClass("Main", [
-            new JMethod(
-                ["public", "static"],
-                "main",
-                "void",
-                [new JParameter("args", "String[]")],
-                [
-                    `for (int i = ${start}; i >= ${end}; i -= ${step}) {`,
-                    `${tab}System.out.println(i);`,
-                    "}",
-                ].join("\n")
-            ),
-        ])
-    );
+    const java = [
+        header,
+        `public class Main {`,
+        `${tab}public static void main(String[] args) {`,
+        `${tab}${tab}for (int i = ${start}; i >= ${end}; i -= ${step}) {`,
+        `${tab}${tab}${tab}System.out.println(i);`,
+        `${tab}${tab}}`,
+        `${tab}}`,
+        `}`,
+    ].join("\n");
+
+    return {
+        displaySource: java,
+        js: () =>
+            new Array(start - end + 1)
+                .fill(0)
+                .map((_, i) => start - i * step)
+                .join(" "),
+    };
 };
 
-const randomCodeMedium_004 = (): JProg => {
+const randomCodeMedium_004 = (): VirtualProg => {
     const varNames = getDogs();
     const bark = getBarkingSounds();
 
-    return new JProg(
-        [],
-        new JClass("Main", [
-            new JMethod(
-                ["public", "static"],
-                "main",
-                "void",
-                [new JParameter("args", "String[]")],
-                [
-                    `Dog ${varNames[0]} = new Dog();`,
-                    `Dog ${varNames[1]} = new Dog("${bark[0]}");`,
-                    `${varNames[0]}.bark();`,
-                    `${varNames[1]}.bark();`,
-                    `${varNames[0]}.setBark("${bark[1]}");`,
-                    `${varNames[0]}.bark();`,
-                    `${varNames[1]}.bark();`,
-                    `${varNames[0]}.bark("${bark[2]}");`,
-                ].join("\n")
-            ),
-        ]),
-        [
-            new JClass(
-                "Dog",
-                [
-                    new JConstructor(
-                        ["public"],
-                        "Dog",
-                        [new JParameter("bark", "String")],
-                        "this.bark = bark;"
-                    ),
-                    new JConstructor(
-                        ["public"],
-                        "Dog",
-                        [],
-                        `this.bark = "${bark[2]}";`
-                    ),
-                    new JMethod(
-                        ["public"],
-                        "setBark",
-                        "void",
-                        [new JParameter("bark", "String")],
-                        `this.bark = bark;`
-                    ),
-                    new JMethod(
-                        ["public"],
-                        "bark",
-                        "void",
-                        [],
-                        [
-                            "String bark;",
-                            "bark = this.bark.concat(this.bark);",
-                            "System.out.println(bark);",
-                        ].join("\n")
-                    ),
-                    new JMethod(
-                        ["public"],
-                        "bark",
-                        "void",
-                        [new JParameter("bark", "String")],
-                        "System.out.println(bark);"
-                    ),
-                ],
-                [new JField(["private"], "bark", "String")]
-            ),
-        ],
-        () =>
-            [
-                bark[2] + bark[2],
-                bark[0] + bark[0],
-                bark[1] + bark[1],
-                bark[0] + bark[0],
-                bark[2],
-            ].join("\n")
-    );
+    const java = [
+        header,
+        `public class Main {`,
+        `${tab}public static void main(String[] args) {`,
+        `${tab}${tab}Dog ${varNames[0]} = new Dog();`,
+        `${tab}${tab}Dog ${varNames[1]} = new Dog("${bark[0]}");`,
+        `${tab}${tab}${varNames[0]}.bark();`,
+        `${tab}${tab}${varNames[1]}.bark();`,
+        `${tab}${tab}${varNames[0]}.setBark("${bark[1]}");`,
+        `${tab}${tab}${varNames[0]}.bark();`,
+        `${tab}${tab}${varNames[1]}.bark();`,
+        `${tab}${tab}${varNames[0]}.bark("${bark[2]}");`,
+        `${tab}}`,
+        `}`,
+        "",
+        `class Dog {`,
+        `${tab}private String bark;`,
+        "",
+        `${tab}public Dog(String bark) {`,
+        `${tab}${tab}this.bark = bark;`,
+        `${tab}}`,
+        "",
+        `${tab}public Dog() {`,
+        `${tab}${tab}this.bark = "${bark[2]}";`,
+        `${tab}}`,
+        "",
+        `${tab}public void setBark(String bark) {`,
+        `${tab}${tab}this.bark = bark;`,
+        `${tab}}`,
+        "",
+        `${tab}public void bark() {`,
+        `${tab}${tab}System.out.println(this.bark);`,
+        `${tab}}`,
+        "",
+        `${tab}public void bark(String bark) {`,
+        `${tab}${tab}System.out.println(bark);`,
+        `${tab}}`,
+        `}`,
+    ].join("\n");
+
+    return {
+        displaySource: java,
+        js: () =>
+            bark[2] +
+            bark[2] +
+            "\n" +
+            bark[0] +
+            bark[0] +
+            "\n" +
+            bark[1] +
+            bark[1] +
+            "\n" +
+            bark[0] +
+            bark[0] +
+            "\n" +
+            bark[2],
+    };
 };
 
-export const randomCodeMedium = (): JProg => {
+export const randomCodeMedium = (): VirtualProg => {
     return pickRandom(
         randomCodeMedium_001,
         randomCodeMedium_002,

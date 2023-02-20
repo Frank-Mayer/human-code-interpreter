@@ -5,16 +5,16 @@
     "publish": "parcel build src/index.html --public-url https://Frank-Mayer.github.io/human-code-interpreter --no-source-maps"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.8.2",
-    "@types/react": "^18.0.26",
-    "@types/react-dom": "^18.0.10",
-    "@types/react-syntax-highlighter": "^15.5.5",
-    "parcel": "^2.8.2",
+    "@parcel/transformer-sass": "^2.8.3",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-syntax-highlighter": "^15.5.6",
+    "parcel": "^2.8.3",
     "process": "^0.11.10"
   },
   "dependencies": {
+    "@frank-mayer/opsult": "^1.0.1",
     "@frank-mayer/stream": "^1.0.0",
-    "java-to-javascript": "^0.1.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-syntax-highlighter": "^15.5.0"
