@@ -51,9 +51,9 @@ const randomCodeEasy_002 = (): VirtualProg => {
         "class Main {",
         tab + "public static void main (String[] args) {",
         `${tab}${tab}String[] animals = {`,
-        ...animals.map((x) => tab.repeat(3) + x),
+        ...animals.map((x) => tab.repeat(3) + `"${x}",`),
         `${tab}${tab}};`,
-        `${tab}System.out.println(animals["${r}",]);`,
+        `${tab}System.out.println(animals[${r}]);`,
         "}",
     ].join("\n");
 
