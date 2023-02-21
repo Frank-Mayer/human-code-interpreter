@@ -243,18 +243,14 @@ export const App = () => {
                             <button
                                 className="button button-wrapper__button--primary"
                                 onClick={() => {
-                                    try {
-                                        const out = prog.js();
-                                        setRealOutput(out);
-                                        setCorrect(
+                                    const out = prog.js();
+                                    setRealOutput(out);
+                                    setCorrect(
                                             compare(
                                                 normalize(out),
-                                                normalize(userOutput)
-                                            )
-                                        );
-                                    } catch (e) {
-                                        console.error(e);
-                                    }
+                                            normalize(userOutput)
+                                        )
+                                    );
                                 }}
                             >
                                 Check
