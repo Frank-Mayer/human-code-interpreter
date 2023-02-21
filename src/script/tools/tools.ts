@@ -37,7 +37,6 @@ export const rInt = (
 };
 
 export const pickRandom = <T>(...arr: T[]) => {
-    console.debug("pickRandom", arr);
     return arr[rInt(0, arr.length - 1, "pickRandom" + JSON.stringify(arr))];
 };
 

@@ -1,17 +1,26 @@
+import type { Lang } from "../tools/Lang";
 import React from "react";
+import Prism from "prismjs";
 
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import Java from "react-syntax-highlighter/dist/esm/languages/prism/java";
-import style from "react-syntax-highlighter/dist/esm/styles/prism/one-dark";
-
-SyntaxHighlighter.registerLanguage("java", Java);
+Prism.manual = true;
 
 type Props = {
+    lang: Lang;
     code: string;
 };
 
-export const Code = (props: Props) => (
-    <SyntaxHighlighter language="java" style={style} showLineNumbers>
-        {props.code}
-    </SyntaxHighlighter>
-);
+export const Code = (props: Props) => {
+    const grammar =
+        props.lang === "java" ? Prism.languages.java : Prism.languages.cpp;
+
+    return (
+        <pre>
+            <code
+                className={`language-${props.lang}`}
+                dangerouslySetInnerHTML={{
+                    __html: Prism.highlight(props.code, grammar, props.lang),
+                }}
+            />
+        </pre>
+    );
+};

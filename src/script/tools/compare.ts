@@ -11,9 +11,23 @@ export const compare = (a: string, b: string) => {
     const bigramsA = getBigrams(a);
     const bigramsB = getBigrams(b);
     const intersection = bigramsA.filter((bigram) => bigramsB.includes(bigram));
-    return Math.round(
+    const x = Math.round(
         ((2 * intersection.length) / (bigramsA.length + bigramsB.length)) * 100
     );
+
+    if (x < 0) {
+        return 0;
+    }
+
+    if (x >= 200) {
+        return 0;
+    }
+
+    if (x > 100) {
+        return x - 100;
+    }
+
+    return x;
 };
 
 /**

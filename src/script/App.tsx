@@ -68,9 +68,17 @@ export const App = () => {
     const [lang, setLang] = React.useState(getLang());
 
     if (!prog) {
-        setProg(randomCode(difficulty, lang));
-        focusTextField();
-        return <p>Loading...</p>;
+        return randomCode(difficulty, lang).match(
+            (newCode) => {
+                setProg(newCode);
+                focusTextField();
+                return <p>Loading...</p>;
+            },
+            (err) => {
+                console.error(err);
+                return <p>Error: {err}</p>;
+            }
+        );
     }
 
     return (
@@ -83,13 +91,19 @@ export const App = () => {
                         onChange={(ev) => {
                             const newDifficulty = parseInt(ev.target.value);
                             if (newDifficulty === difficulty) return;
-
-                            setDifficulty(newDifficulty);
-                            setProg(randomCode(newDifficulty, lang));
-                            setRealOutput("");
-                            setUserOutput("");
-                            focusTextField();
-                            storeDifficulty(newDifficulty);
+                            randomCode(newDifficulty, lang).match(
+                                (newCode) => {
+                                    setDifficulty(newDifficulty);
+                                    setProg(newCode);
+                                    setRealOutput("");
+                                    setUserOutput("");
+                                    focusTextField();
+                                    storeDifficulty(newDifficulty);
+                                },
+                                (err) => {
+                                    console.error(err);
+                                }
+                            );
                         }}
                     >
                         <option value={1}>Easy</option>
@@ -105,14 +119,22 @@ export const App = () => {
                             const newLang = ev.target.value;
                             if (newLang === lang || !isLang(newLang)) return;
 
-                            setLang(newLang);
-                            setProg(randomCode(difficulty, newLang));
-                            setRealOutput("");
-                            setUserOutput("");
-                            focusTextField();
-                            storeLang(newLang);
+                            randomCode(difficulty, newLang).match(
+                                (newCode) => {
+                                    setLang(newLang);
+                                    setProg(newCode);
+                                    setRealOutput("");
+                                    setUserOutput("");
+                                    focusTextField();
+                                    storeLang(newLang);
+                                },
+                                (err) => {
+                                    console.error(err);
+                                }
+                            );
                         }}
                     >
+                        <option value="cpp">C / C++</option>
                         <option value="java">Java</option>
                     </select>
                 </label>
@@ -120,7 +142,7 @@ export const App = () => {
 
             <section className="app__display-source">
                 <p>What will the following code print?</p>
-                <Code code={prog.displaySource} />
+                <Code lang={prog.lang} code={prog.displaySource} />
             </section>
 
             <section className="app__output output">
@@ -134,10 +156,17 @@ export const App = () => {
                             <button
                                 className="output__element--correct button"
                                 onClick={() => {
-                                    setProg(randomCode(difficulty, lang));
-                                    setRealOutput("");
-                                    setUserOutput("");
-                                    focusTextField();
+                                    randomCode(difficulty, lang).match(
+                                        (newCode) => {
+                                            setProg(newCode);
+                                            setRealOutput("");
+                                            setUserOutput("");
+                                            focusTextField();
+                                        },
+                                        (err) => {
+                                            console.error(err);
+                                        }
+                                    );
                                 }}
                             >
                                 Next
@@ -158,10 +187,17 @@ export const App = () => {
                             <button
                                 className="output__element--wrong button"
                                 onClick={() => {
-                                    setProg(randomCode(difficulty, lang));
-                                    setRealOutput("");
-                                    setUserOutput("");
-                                    focusTextField();
+                                    randomCode(difficulty, lang).match(
+                                        (newCode) => {
+                                            setProg(newCode);
+                                            setRealOutput("");
+                                            setUserOutput("");
+                                            focusTextField();
+                                        },
+                                        (err) => {
+                                            console.error(err);
+                                        }
+                                    );
                                 }}
                             >
                                 {Number.isSafeInteger(correct)
@@ -188,10 +224,18 @@ export const App = () => {
                             <button
                                 className="button button-wrapper__button"
                                 onClick={() => {
-                                    setProg(randomCode(difficulty, lang));
-                                    setRealOutput("");
-                                    setUserOutput("");
-                                    setCorrect(0);
+                                    randomCode(difficulty, lang).match(
+                                        (newCode) => {
+                                            setProg(newCode);
+                                            setRealOutput("");
+                                            setUserOutput("");
+                                            setCorrect(0);
+                                            focusTextField();
+                                        },
+                                        (err) => {
+                                            console.error(err);
+                                        }
+                                    );
                                 }}
                             >
                                 Skip

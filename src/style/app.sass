@@ -4,14 +4,6 @@
     inset: 0
     padding: 0.5rem
 
-    > *,
-    > * > *
-        display: block
-
-    > *
-        textarea, pre, code
-            font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace
-
     &__header
         display: flex
         flex-direction: row
@@ -33,13 +25,15 @@
 
         &__display-source
             grid-area: display-source
+            min-width: 0
+            min-height: 0
 
             > pre
-                max-height: calc(100vh - 80px)
+                overflow: auto
+                height: calc(100% - 1.75rem)
 
         &__output
             grid-area: output
-            max-height: calc(100vh - 48px)
 
 @media (max-width: 120vh)
     .app
@@ -62,12 +56,16 @@
         &__display-source
             grid-area: display-source
             white-space: nowrap
+            min-width: 0
             width: 100%
+            min-height: 0
             height: 100%
 
             > pre
                 width: 100%
+                display: block
                 max-height: calc(100% - 32px)
+                overflow: auto
 
         &__output
             grid-area: output

@@ -1,0 +1,12 @@
+{
+  "plugins": [
+    [
+      "prismjs",
+      {
+        "languages": ["java", "cpp"],
+        "plugins": [],
+        "css": false
+      }
+    ]
+  ]
+}
