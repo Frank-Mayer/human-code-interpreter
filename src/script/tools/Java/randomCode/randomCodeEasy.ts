@@ -53,7 +53,7 @@ const randomCodeEasy_002 = (): VirtualProg => {
         `${tab}${tab}String[] animals = {`,
         ...animals.map((x) => tab.repeat(3) + x),
         `${tab}${tab}};`,
-        `${tab}System.out.println(animals[${r}]);`,
+        `${tab}System.out.println(animals["${r}"]);`,
         "}",
     ].join("\n");
 
