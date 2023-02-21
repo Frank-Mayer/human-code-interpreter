@@ -26,6 +26,8 @@ export const compare = (a: string, b: string) => {
     if (x > 100) {
         return x - 100;
     }
+
+    return x;
 };
 
 /**
