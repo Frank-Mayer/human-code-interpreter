@@ -1,3 +1,5 @@
+@use "sass:math"
+
 .app
     height: 100vh
     width: 100vw
@@ -12,13 +14,17 @@
         gap: 0.5rem
         flex-wrap: wrap
 
-@media (min-width: 120vh)
+@media (min-width: 751px)
     .app
         display: grid
         grid-template-columns: 1fr 1fr
         grid-template-rows: auto 1fr
         gap: 0.5rem
         grid-template-areas: "header header" "display-source output"
+        max-width: 1920px
+        $app-height: 1080px
+        max-height: min($app-height, 100vh)
+        margin: max(0px, calc(50vh - math.div($app-height, 2))) auto
 
         &__header
             grid-area: header
@@ -35,7 +41,7 @@
         &__output
             grid-area: output
 
-@media (max-width: 120vh)
+@media (max-width: 750px)
     .app
         display: grid
         grid-template-columns: 1fr
