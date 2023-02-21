@@ -7,6 +7,8 @@ const hash = (str: string) => {
     return h >>> 0;
 };
 
+export const packageName = "io.frankmayer.humancodeinterpreter";
+
 const lastRandomMap = new Map<number, number>();
 export const rInt = (
     min: number,

@@ -1,6 +1,8 @@
+import { packageName } from "../tools";
+
 export const header =
     [
-        "package io.frankmayer.javafun;",
+        `package ${packageName};`,
         "",
         "import java.util.*;",
         "import java.util.stream.*;",
