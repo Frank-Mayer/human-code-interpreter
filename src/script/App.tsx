@@ -135,13 +135,14 @@ export const App = () => {
                         }}
                     >
                         <option value="java">Java</option>
+                        <option value="cpp">C / C++</option>
                     </select>
                 </label>
             </header>
 
             <section className="app__display-source">
                 <p>What will the following code print?</p>
-                <Code code={prog.displaySource} />
+                <Code lang={prog.lang} code={prog.displaySource} />
             </section>
 
             <section className="app__output output">

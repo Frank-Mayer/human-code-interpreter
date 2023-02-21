@@ -1,7 +1,7 @@
 import { VirtualProg } from "../../VirtualProg";
 import { header } from "../header";
 import { tab } from "../tab";
-import { getVarNames, pickRandom, rInt } from "./tools";
+import { getVarNames, pickRandom, rInt } from "../../tools";
 import { SequentialStream } from "@frank-mayer/stream";
 
 const randomCodeHard_001 = (): VirtualProg => {
@@ -28,6 +28,7 @@ const randomCodeHard_001 = (): VirtualProg => {
     ].join("\n");
 
     return {
+        lang: "java",
         displaySource: java,
         js: () =>
             new Array(max)
@@ -61,6 +62,7 @@ const randomCodeHard_002 = (): VirtualProg => {
     ].join("\n");
 
     return {
+        lang: "java",
         displaySource: java,
         js: () =>
             new Array(max)
@@ -90,6 +92,7 @@ const randomCodeHard_003 = (): VirtualProg => {
     ].join("\n");
 
     return {
+        lang: "java",
         displaySource: java,
         js: () => {
             const a = [1, 2, 3];
@@ -138,6 +141,7 @@ const randomCodeHard_004 = (): VirtualProg => {
     ].join("\n");
 
     return {
+        lang: "java",
         displaySource: java,
         js: () => {
             const result = new Array<string>();

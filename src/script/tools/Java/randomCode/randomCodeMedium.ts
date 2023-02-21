@@ -7,7 +7,7 @@ import {
     getVarNames,
     pickRandom,
     rInt,
-} from "./tools";
+} from "../../tools";
 
 const randomCodeMedium_001 = (): VirtualProg => {
     const varNames = getVarNames();
@@ -38,6 +38,7 @@ const randomCodeMedium_001 = (): VirtualProg => {
     ].join("\n");
 
     return {
+        lang: "java",
         displaySource: java,
         js: () => {
             let a = r;
@@ -69,6 +70,7 @@ const randomCodeMedium_002 = (): VirtualProg => {
     ].join("\n");
 
     return {
+        lang: "java",
         displaySource: java,
         js: () =>
             new Array(end - start + 1)
@@ -95,6 +97,7 @@ const randomCodeMedium_003 = (): VirtualProg => {
     ].join("\n");
 
     return {
+        lang: "java",
         displaySource: java,
         js: () =>
             new Array(start - end + 1)
@@ -151,6 +154,7 @@ const randomCodeMedium_004 = (): VirtualProg => {
     ].join("\n");
 
     return {
+        lang: "java",
         displaySource: java,
         js: () =>
             bark[2] +

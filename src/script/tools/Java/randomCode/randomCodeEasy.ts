@@ -1,8 +1,7 @@
 import type { VirtualProg } from "../../VirtualProg";
-import { makeVirtualProg } from "../../VirtualProg";
 import { header } from "../header";
 import { tab } from "../tab";
-import { getVarNames, pickRandom, rInt } from "./tools";
+import { getVarNames, pickRandom, rInt } from "../../tools";
 
 const randomCodeEasy_001 = (): VirtualProg => {
     const varNames = getVarNames();
@@ -27,7 +26,11 @@ const randomCodeEasy_001 = (): VirtualProg => {
         "}",
     ].join("\n");
 
-    return makeVirtualProg(java, () => (a + b + c).toString());
+    return {
+        lang: "java",
+        displaySource: java,
+        js: () => (a + b + c).toString(),
+    };
 };
 
 const randomCodeEasy_002 = (): VirtualProg => {
@@ -54,7 +57,7 @@ const randomCodeEasy_002 = (): VirtualProg => {
         "}",
     ].join("\n");
 
-    return makeVirtualProg(java, () => animals[r]);
+    return { lang: "java", displaySource: java, js: () => animals[r] };
 };
 
 const randomCodeEasy_003 = (): VirtualProg => {
@@ -81,11 +84,15 @@ const randomCodeEasy_003 = (): VirtualProg => {
     java.push(tab + "}");
     java.push("}");
 
-    return makeVirtualProg(java.join("\n"), () => {
-        const animals = varNames.slice(0, count);
-        animals.splice(r, 1);
-        return animals[index];
-    });
+    return {
+        lang: "java",
+        displaySource: java.join("\n"),
+        js: () => {
+            const animals = varNames.slice(0, count);
+            animals.splice(r, 1);
+            return animals[index];
+        },
+    };
 };
 
 const randomCodeEasy_004 = (): VirtualProg => {
@@ -113,15 +120,19 @@ const randomCodeEasy_004 = (): VirtualProg => {
         "}",
     ].join("\n");
 
-    return makeVirtualProg(java, () => {
-        if (value >= a) {
-            return varNames[1];
-        } else if (value <= b) {
-            return varNames[2];
-        } else {
-            return varNames[3];
-        }
-    });
+    return {
+        lang: "java",
+        displaySource: java,
+        js: () => {
+            if (value >= a) {
+                return varNames[1];
+            } else if (value <= b) {
+                return varNames[2];
+            } else {
+                return varNames[3];
+            }
+        },
+    };
 };
 
 const randomCodeEasy_005 = (): VirtualProg => {
@@ -139,13 +150,17 @@ const randomCodeEasy_005 = (): VirtualProg => {
         "}",
     ].join("\n");
 
-    return makeVirtualProg(java, () => {
-        const result = new Array<string>();
-        for (let i = start; i <= end; i++) {
-            result.push(i.toString());
-        }
-        return result.join("\n");
-    });
+    return {
+        lang: "java",
+        displaySource: java,
+        js: () => {
+            const result = new Array<string>();
+            for (let i = start; i <= end; i++) {
+                result.push(i.toString());
+            }
+            return result.join("\n");
+        },
+    };
 };
 
 export const randomCodeEasy = (): VirtualProg => {
