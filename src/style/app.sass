@@ -8,10 +8,6 @@
     > * > *
         display: block
 
-    > *
-        textarea, pre, code
-            font-family: "Fira Code", "Fira Mono", Menlo, Consolas, "DejaVu Sans Mono", monospace
-
     &__header
         display: flex
         flex-direction: row
@@ -35,7 +31,9 @@
             grid-area: display-source
 
             > pre
+                display: block
                 max-height: calc(100vh - 80px)
+                overflow: auto
 
         &__output
             grid-area: output
@@ -67,7 +65,9 @@
 
             > pre
                 width: 100%
+                display: block
                 max-height: calc(100% - 32px)
+                overflow: auto
 
         &__output
             grid-area: output
