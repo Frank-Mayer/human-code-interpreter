@@ -1,34 +1,51 @@
 import type { VirtualProg } from "../../VirtualProg";
-import { pickRandom, rInt } from "../../tools";
+import { getVarNames, pickRandom, rInt } from "../../tools";
 import { header } from "../header";
 import { tab } from "../tab";
 
 const randomCodeMedium_001 = (): VirtualProg => {
-    const a = rInt(0, 4);
-    const b = rInt(5, 9);
+    const bar = rInt(512, 1024);
+    const foo = rInt(128, 511);
+    const className = getVarNames()[0].replace(/^[a-z]/g, (c) =>
+        c.toUpperCase()
+    );
 
     const cpp = [
         header,
-        "void swap(int a, int b)",
+        `class ${className}`,
         "{",
-        tab + "int t = a;",
+        tab + "private:",
+        tab + tab + className + "()",
+        tab + tab + "{",
+        tab + tab + tab + `bar = ${bar};`,
+        tab + tab + "}",
+        tab + tab + "",
+        tab + "public:",
+        tab + tab + "int bar;",
         "",
-        tab + "a = b;",
-        tab + "b = t;",
-        "}",
+        tab + tab + "int getBar()",
+        tab + tab + "{",
+        tab + tab + tab + "return bar;",
+        tab + tab + "}",
+        tab + tab + "",
+        tab + tab + "int getFoo()",
+        tab + tab + "{",
+        tab + tab + tab + `return ${foo};`,
+        tab + tab + "}",
+        "};",
         "",
-        "int main()",
+        "int main ()",
         "{",
-        tab + `int x = ${a}, y = ${b};`,
-        tab + "swap(x, y);",
-        tab + "std::cout << x << ' ' << y;",
+        tab + className + "* m = nullptr;",
+        tab + `printf("%d", m->getFoo());`,
+        tab + "return 0;",
         "}",
     ].join("\n");
 
     return {
         lang: "cpp",
         displaySource: cpp,
-        js: () => `${b} ${a}`,
+        js: () => foo.toString(),
     };
 };
 

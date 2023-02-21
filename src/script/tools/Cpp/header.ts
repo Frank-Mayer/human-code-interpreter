@@ -1,4 +1,1 @@
-export const header =
-    ["#include <iostream>", "#include <string>", "#include <vector>"].join(
-        "\n"
-    ) + "\n";
+export const header = ["#include<stdio.h>"].join("\n") + "\n";

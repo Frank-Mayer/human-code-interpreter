@@ -134,8 +134,8 @@ export const App = () => {
                             );
                         }}
                     >
-                        <option value="java">Java</option>
                         <option value="cpp">C / C++</option>
+                        <option value="java">Java</option>
                     </select>
                 </label>
             </header>

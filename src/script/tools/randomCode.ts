@@ -1,7 +1,6 @@
 import type { Lang } from "./Lang";
 import { randomCode as randomCodeCpp } from "./Cpp/randomCode";
 import { randomCode as randomCodeJava } from "./Java/randomCode";
-// import { randomCode as randomCodeRust } from "./Rust/randomCode";
 import type { VirtualProg } from "./VirtualProg";
 import { Result } from "@frank-mayer/opsult";
 
@@ -14,8 +13,6 @@ export const randomCode = (
             return randomCodeCpp(difficulty);
         case "java":
             return randomCodeJava(difficulty);
-        // case "rust":
-        //     return randomCodeRust(difficulty);
         default:
             return Result.Err(`Language "${lang}" not supported.`);
     }

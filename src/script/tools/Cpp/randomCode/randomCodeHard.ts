@@ -1,34 +1,28 @@
 import type { VirtualProg } from "../../VirtualProg";
-import { pickRandom, rInt } from "../../tools";
+import { getVarNames, pickRandom, rInt } from "../../tools";
 import { header } from "../header";
 import { tab } from "../tab";
 
 const randomCodeHard_001 = (): VirtualProg => {
-    const a = rInt(0, 4);
-    const b = rInt(5, 9);
+    const str = getVarNames()[0];
 
     const cpp = [
         header,
-        "void swap(int a, int b)",
-        "{",
-        tab + "int t = a;",
-        "",
-        tab + "a = b;",
-        tab + "b = t;",
-        "}",
-        "",
         "int main()",
         "{",
-        tab + `int x = ${a}, y = ${b};`,
-        tab + "swap(x, y);",
-        tab + "std::cout << x << ' ' << y;",
-        "}",
+        `${tab}char* s = "${str}";`,
+        "",
+        `${tab}printf("%s ",s);`,
+        `${tab}s++;`,
+        `${tab}printf("%s",s);`,
+        `${tab}return 0;`,
+        `}`,
     ].join("\n");
 
     return {
         lang: "cpp",
         displaySource: cpp,
-        js: () => `${b} ${a}`,
+        js: () => str.substring(1),
     };
 };
 
