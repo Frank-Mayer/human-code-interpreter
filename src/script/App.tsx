@@ -134,7 +134,7 @@ export const App = () => {
                             );
                         }}
                     >
-                        <option value="cpp">C / C++</option>
+                        <option value="cpp">C / C++ [BETA]</option>
                         <option value="java">Java</option>
                     </select>
                 </label>
@@ -246,8 +246,8 @@ export const App = () => {
                                     const out = prog.js();
                                     setRealOutput(out);
                                     setCorrect(
-                                            compare(
-                                                normalize(out),
+                                        compare(
+                                            normalize(out),
                                             normalize(userOutput)
                                         )
                                     );
